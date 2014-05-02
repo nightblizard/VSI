@@ -10,6 +10,24 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CodeStub.cpp" />
+    <ClCompile Include="..\src\Connector.cpp" />
+    <ClCompile Include="..\src\DrawableString.cpp" />
+    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\Widgets\Function.cpp" />
+    <ClCompile Include="..\src\Widgets\Widget.cpp" />
+    <ClCompile Include="..\src\XML\WidgetBuilder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\CodeStub.h" />
+    <ClInclude Include="..\src\Connector.h" />
+    <ClInclude Include="..\src\DrawableString.h" />
+    <ClInclude Include="..\src\stdafx.h" />
+    <ClInclude Include="..\src\Widgets\Function.h" />
+    <ClInclude Include="..\src\Widgets\Widget.h" />
+    <ClInclude Include="..\src\XML\WidgetBuilder.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6A3CB4A7-28E2-451C-AF03-1F50BC3B3BED}</ProjectGuid>
     <RootNamespace>VSI</RootNamespace>
@@ -39,8 +57,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Programmieren\C++\LibCinder\include;C:\Programmieren\C++\LibCinder\boost;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Programmieren\C++\LibCinder\lib;C:\Programmieren\C++\LibCinder\lib\msw\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Programmieren\C++\LibCinder\include;C:\Programmieren\C++\LibCinder\boost;$(SolutionDir)\dep;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Programmieren\C++\LibCinder\lib;C:\Programmieren\C++\LibCinder\lib\msw\lib;$(SolutionDir)dep\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Programmieren\C++\LibCinder\include;C:\Programmieren\C++\LibCinder\boost;$(IncludePath)</IncludePath>
@@ -56,7 +74,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Glu32.lib;cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/NODEFAULTLIB:LIBCMT %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -73,21 +91,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>cinder.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Glu32.lib;cinder.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="CodeStub.cpp" />
-    <ClCompile Include="Connector.cpp" />
-    <ClCompile Include="DrawableString.cpp" />
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CodeStub.h" />
-    <ClInclude Include="Connector.h" />
-    <ClInclude Include="DrawableString.h" />
-    <ClInclude Include="stdafx.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

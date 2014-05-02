@@ -13,9 +13,9 @@
 
 #include "DrawableString.h"
 #include "CodeStub.h"
+#include "Widget.h"
 
-#pragma comment(lib, "cinder.lib")
-#pragma comment(lib, "Glu32.lib")
+#include "WidgetBuilder.h"
 
 using namespace cinder;
 
@@ -69,8 +69,6 @@ class TestApp : public cinder::app::AppNative
 	Quatf mSceneRotation;
 
 	Color mColor {1.f, 0.f, 0.f};
-
-	float px = -6, py = -4;
 
 	float mRatio;
 	float posX = 224.f;
@@ -142,7 +140,6 @@ void TestApp::prepareSettings(Settings *settings)
 	settings->setResizable(false);
 }
 
-
 void TestApp::setup()
 {
 	getForegroundWindow()->setTitle("Hello Cinder!");
@@ -163,20 +160,10 @@ void TestApp::setup()
 	HWND wnd = (HWND)getForegroundWindow()->getNative();
 	auto style = GetWindowLong(wnd, GWL_STYLE);
 	SetWindowLong(wnd, GWL_STYLE, style & ~WS_MAXIMIZEBOX);
-#endif
-}
+#endif 
 
-void TestApp::drawPointList(const std::vector<Line>& points)
-{
-	for (unsigned int i = 1; i < points.size(); ++i)
-	{
-		auto& pos = points[i].pos;
-		auto& last = points[i - 1].pos;
-
-		gl::color(points[i].clr);
-
-		gl::drawLine(last, pos);
-	}
+	Widgets::WidgetBuilder wb;
+	wb.Parse("xml/Foobar.xml");
 }
 
 void TestApp::update()
@@ -221,7 +208,19 @@ void TestApp::draw()
 
 	gl::rotate(mSceneRotation);
 
+	gl::color(cinder::Color::black());
 
+	using namespace Widgets;
+	auto w = std::make_shared<Widget>();
+	w->SetBounds({ 400, 400 }, { 100, 100 });
+	w->Draw();
+
+	gl::color(cinder::Color::white());
+	auto w2 = std::make_shared<Widget>(w, RelativePoint::Bottom);
+	w2->SetBounds({ -25, 0 }, { 50, 50 });
+	w2->Draw();
+
+	/*
 	CodeStub cs("Do something", { 400, 400 });
 	cs.addInput("Do it!");
 	cs.addOutput("Out");

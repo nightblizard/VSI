@@ -1,15 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="CodeStub.cpp" />
-    <ClCompile Include="Connector.cpp" />
-    <ClCompile Include="DrawableString.cpp" />
+    <Filter Include="Widgets">
+      <UniqueIdentifier>{0cddf820-66c6-47d5-91ff-c45d57244227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{62ffd5c9-2880-4b55-877f-b451214b954d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CodeStub.h" />
-    <ClInclude Include="Connector.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="DrawableString.h" />
+    <ClCompile Include="..\src\CodeStub.cpp" />
+    <ClCompile Include="..\src\Connector.cpp" />
+    <ClCompile Include="..\src\DrawableString.cpp" />
+    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\XML\WidgetBuilder.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Widgets\Function.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Widgets\Widget.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\CodeStub.h" />
+    <ClInclude Include="..\src\Connector.h" />
+    <ClInclude Include="..\src\DrawableString.h" />
+    <ClInclude Include="..\src\stdafx.h" />
+    <ClInclude Include="..\src\XML\WidgetBuilder.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Widgets\Function.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Widgets\Widget.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
