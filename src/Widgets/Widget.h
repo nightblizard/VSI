@@ -5,6 +5,8 @@
 #include <cinder\Vector.h>
 #include <cinder\Rect.h>
 
+#include "EventHandler.h"
+
 namespace Widgets
 {
 	enum class RelativePoint
@@ -34,7 +36,7 @@ namespace Widgets
 		("BottomRight", RelativePoint::BottomRight)
 		("None", RelativePoint::None);
 
-	class Widget
+	class Widget : public EventHandler, public std::enable_shared_from_this<Widget>
 	{
 	protected:
 		std::shared_ptr<Widget> mParent = nullptr;
@@ -48,6 +50,15 @@ namespace Widgets
 		std::string mName;
 
 		void updateBounds();
+
+		virtual void OnMouseUp(cinder::app::MouseEvent& event) override {}
+		virtual void OnMouseDown(cinder::app::MouseEvent& event) override {}
+		virtual void OnMouseMove(cinder::app::MouseEvent& event) override {}
+		virtual void OnMouseDrag(cinder::app::MouseEvent& event) override {}
+
+		virtual void OnKeyUp(cinder::app::KeyEvent& event) override {}
+		virtual void OnKeyDown(cinder::app::KeyEvent& event) override {}
+
 	public:
 		virtual ~Widget() = default;
 		Widget() = default;
@@ -61,7 +72,7 @@ namespace Widgets
 		cinder::Vec2i GetSize() const;
 		void SetSize(const cinder::Vec2i& size);
 
-		std::pair<cinder::Vec2i, cinder::Vec2i> GetBounds() const;
+		cinder::Rectf GetBounds() const;
 		void SetBounds(const cinder::Vec2i& position, const cinder::Vec2i& size);
 		void SetBounds(const std::pair<cinder::Vec2i, cinder::Vec2i>& rect);
 
@@ -73,6 +84,8 @@ namespace Widgets
 
 		void SetRelativePoint(RelativePoint relativeTo);
 		RelativePoint GetRelativePoint() const;
+
+		void SetParent(std::shared_ptr<Widget> parent);
 
 		virtual void Draw() const;
 	};

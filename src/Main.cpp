@@ -13,9 +13,10 @@
 
 #include "DrawableString.h"
 #include "CodeStub.h"
-#include "Widget.h"
-
-#include "WidgetBuilder.h"
+#include "Widgets/Widget.h"
+#include "Widgets/Function.h"
+#include "Widgets/Connector.h"
+#include "XML/WidgetBuilder.h"
 
 using namespace cinder;
 
@@ -77,6 +78,8 @@ class TestApp : public cinder::app::AppNative
 	int mouseDownX;
 	int mouseDownY;
 
+	std::shared_ptr<Widgets::Widget> mFunction;
+
 public:
 	void setup();
 	void draw();
@@ -92,11 +95,14 @@ public:
 
 void TestApp::mouseUp(app::MouseEvent event)
 {
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseUp>(event);
 }
 
 void TestApp::mouseDown(app::MouseEvent event)
 {
-	if(event.isLeft())
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(event);
+
+	if(event.isHandled() == false && event.isLeft())
 	{
 		mouseDownX = event.getX();
 		mouseDownY = event.getY();
@@ -106,7 +112,11 @@ void TestApp::mouseDown(app::MouseEvent event)
 
 void TestApp::mouseDrag(app::MouseEvent event)
 {
-	if (event.isRight())
+	app::MouseEvent e(getWindow(), 0, 0, 0, 0, 0.f, 0);
+
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDrag>(event);
+
+	if (event.isHandled() || event.isRight())
 		return;
 
 	auto modifier = event.getNativeModifiers();
@@ -142,7 +152,7 @@ void TestApp::prepareSettings(Settings *settings)
 
 void TestApp::setup()
 {
-	getForegroundWindow()->setTitle("Hello Cinder!");
+	getForegroundWindow()->setTitle("VSI");
 	mParams = params::InterfaceGl::create("Foobar", Vec2i(200, 160));
 
 	mParams->addParam("Scene Rotation:", &mSceneRotation);
@@ -162,8 +172,16 @@ void TestApp::setup()
 	SetWindowLong(wnd, GWL_STYLE, style & ~WS_MAXIMIZEBOX);
 #endif 
 
-	Widgets::WidgetBuilder wb;
-	wb.Parse("xml/Foobar.xml");
+	XML::WidgetBuilder wb;
+	mFunction = wb.Parse("xml/Foobar.xml");
+
+	//mFunction = std::make_shared<Widgets::Function>();
+	//mFunction->SetBounds({ 200, 200 }, { 100, 100 });
+	/*
+	auto connector = std::make_shared<Widgets::Connector>();
+	auto connector2 = std::make_shared<Widgets::Connector>();
+	mFunction->AddInput(connector);
+	mFunction->AddInput(connector2);*/
 }
 
 void TestApp::update()
@@ -176,49 +194,29 @@ void TestApp::update()
 				  app::getWindowHeight() * mCameraDistance / 100 + posY,
 				  posY, 5.f, 10000.f);
 
-	gl::setMatrices(mCam);
-
 	mRatio = app::getWindowAspectRatio();
 }
 
 void TestApp::draw()
 {
 	gl::clear(ColorA(0.39f, 0.58f, 0.92f));
-	gl::enableDepthRead();
-	gl::enableDepthWrite();
-	gl::disableAlphaBlending();
-	glColor4f(1.f, 1.f, 1.f, 1.f);
-	
-	glColor4f(1.f, 1.f, 1.f, 1.f);
 
-	gl::pushMatrices();
-		mCam.lookAt(Vec3f(0.f, 0.f, 6), mCenter, mUp);
-		gl::setMatrices(mCam);
-
-		gl::translate(4, 3);
-		gl::scale(.5f, .5f, .5f);
-		gl::rotate(mSceneRotation);
-		gl::drawCoordinateFrame();
-
-	gl::popMatrices();
-
-	gl::disableDepthRead();
-	gl::disableDepthWrite();
-	gl::enableAlphaBlending();
-
-	gl::rotate(mSceneRotation);
+	gl::setMatrices(mCam);
 
 	gl::color(cinder::Color::black());
-
+	/*
 	using namespace Widgets;
-	auto w = std::make_shared<Widget>();
+	static auto w = std::make_shared<Widget>();
 	w->SetBounds({ 400, 400 }, { 100, 100 });
 	w->Draw();
 
-	gl::color(cinder::Color::white());
-	auto w2 = std::make_shared<Widget>(w, RelativePoint::Bottom);
-	w2->SetBounds({ -25, 0 }, { 50, 50 });
+	cinder::gl::color(cinder::Color::white());
+	static auto w2 = std::make_shared<Widget>(w, RelativePoint::BottomRight);
+	w2->SetBounds({ 0, 0 }, { 50, 50 });
 	w2->Draw();
+	*/
+	gl::color(cinder::Color::black());
+	mFunction->Draw();
 
 	/*
 	CodeStub cs("Do something", { 400, 400 });

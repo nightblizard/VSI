@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include <cinder\Rect.h>
 #include "Widget.h"
 
@@ -23,10 +23,10 @@ namespace Widgets
 			return;
 		}
 
-		float px = static_cast<float>(mParent->mPosition.x);
-		float py = static_cast<float>(mParent->mPosition.y);
-		float pu = static_cast<float>(mParent->mSize.x);
-		float pv = static_cast<float>(mParent->mSize.y);
+		float px = static_cast<float>(mParent->mBounds.x1);
+		float py = static_cast<float>(mParent->mBounds.y1);
+		float pu = static_cast<float>(mParent->mBounds.x2);
+		float pv = static_cast<float>(mParent->mBounds.y2);
 
 		float x1 = px + mPosition.x,
 			  y1 = py + mPosition.y,
@@ -36,52 +36,58 @@ namespace Widgets
 		switch (mRelativeTo)
 		{
 		case RelativePoint::TopRight:
-			x1 = px + pu + mPosition.x;
+			x1 = pu + mPosition.x;
 			x2 = x1 + mSize.x;
 			break;
 
 		case RelativePoint::Top:
-			x1 = pu / 2.f + px + mPosition.x;
+			x1 = (px + pu) / 2.f + mPosition.x;
 			x2 = x1 + mSize.x;
 			break;
 
 		case RelativePoint::TopLeft:
+			x1 = px + mPosition.x;
+			x2 = x1 + mSize.x;
 			break;
 
 		case RelativePoint::Left:
-			y1 = pv / 2 + py + mPosition.y;
+			x1 = px + mPosition.x;
+			y1 = (py + pv) / 2 + mPosition.y;
+			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
 
 		case RelativePoint::Center:
-			x1 = pu / 2.f + px + mPosition.x;
-			y1 = pv / 2 + py + mPosition.y;
+			x1 = (px + pu) / 2.f + mPosition.x;
+			y1 = (py + pv) / 2 + mPosition.y;
 			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
 
 		case RelativePoint::Right:
-			x1 = pu + px + mPosition.x;
-			y1 = pv / 2 + py + mPosition.y;
+			x1 = pu + mPosition.x;
+			y1 = (py + pv) / 2 + mPosition.y;
 			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
 
 		case RelativePoint::BottomLeft:
-			y1 = py + pu + mPosition.y;
+			x1 = px + mPosition.x;
+			y1 = pv + mPosition.y;
+			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
 
 		case RelativePoint::Bottom:
-			x1 = pu / 2.f + px + mPosition.x;
-			y1 = py + pu + mPosition.y;
+			x1 = (px + pu) / 2.f + mPosition.x;
+			y1 = pv + mPosition.y;
 			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
 
 		case RelativePoint::BottomRight:
-			x1 = pu + px + mPosition.x;
-			y1 = py + pu + mPosition.y;
+			x1 = pu + mPosition.x;
+			y1 = pv + mPosition.y;
 			x2 = x1 + mSize.x;
 			y2 = y1 + mSize.y;
 			break;
@@ -103,20 +109,20 @@ namespace Widgets
 
 	cinder::Vec2i Widget::GetPosition() const
 	{
-		return mPosition;
+		return cinder::Vec2i(static_cast<int>(mBounds.x1), static_cast<int>(mBounds.y1));
 	}
 
 
 	void Widget::SetPosition(const cinder::Vec2i& pos)
 	{
-		updateBounds();
 		mPosition = pos;
+		updateBounds();
 	}
 
 
 	cinder::Vec2i Widget::GetSize() const
 	{
-		return mSize;
+		return cinder::Vec2i(static_cast<int>(mBounds.x2), static_cast<int>(mBounds.y2));
 	}
 
 
@@ -127,9 +133,9 @@ namespace Widgets
 	}
 
 
-	std::pair<cinder::Vec2i, cinder::Vec2i> Widget::GetBounds() const
+	cinder::Rectf Widget::GetBounds() const
 	{
-		return std::make_pair(mPosition, mSize);
+		return mBounds;
 	}
 
 
@@ -146,12 +152,6 @@ namespace Widgets
 		mPosition = { rect.first.x, rect.first.y };
 		mSize = { rect.second.x, rect.second.y };
 		updateBounds();
-	}
-
-
-	void Widget::Draw() const
-	{
-		cinder::gl::drawSolidRect(mBounds);
 	}
 
 
@@ -196,8 +196,21 @@ namespace Widgets
 		mRelativeTo = relativeTo;
 	}
 
+
 	RelativePoint Widget::GetRelativePoint() const
 	{
 		return mRelativeTo;
+	}
+
+
+	void Widget::SetParent(std::shared_ptr<Widget> parent)
+	{
+		mParent = parent;
+	}
+
+
+	void Widget::Draw() const
+	{
+		cinder::gl::drawSolidRect(mBounds);
 	}
 }

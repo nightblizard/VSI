@@ -3,20 +3,21 @@
 #include <memory>
 #include <string>
 #include <rapidxml\rapidxml.hpp>
+#include "../Widgets/Function.h"
 
-namespace Widgets
+
+namespace XML
 {
-	class Widget;
 
 	class WidgetBuilder
 	{
-		std::shared_ptr<Widget> mWidget;
+		std::shared_ptr<Widgets::Function> mWidget;
 
 		rapidxml::xml_document<> mXmlDocument;
 	public:
 
 		WidgetBuilder();
 
-		std::shared_ptr<Widget> Parse(const std::string& filePath);
+		std::shared_ptr<Widgets::Function> Parse(const std::string& filePath);
 };
 }
