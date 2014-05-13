@@ -12,7 +12,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Main.cpp" />
     <ClCompile Include="..\src\XML\WidgetBuilder.cpp">
       <Filter>XML</Filter>
     </ClCompile>
@@ -31,6 +30,8 @@
     <ClCompile Include="..\src\Widgets\EventHandler.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Application.cpp" />
+    <ClCompile Include="..\src\Main_old.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h" />
@@ -52,5 +53,6 @@
     <ClInclude Include="..\src\Widgets\EventHandler.h">
       <Filter>Widgets</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Application.h" />
   </ItemGroup>
 </Project>

@@ -11,7 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\Application.cpp" />
+    <ClCompile Include="..\src\Main_old.cpp" />
     <ClCompile Include="..\src\Widgets\Connector.cpp" />
     <ClCompile Include="..\src\Widgets\Controls\PopupMenu.cpp" />
     <ClCompile Include="..\src\Widgets\EventHandler.cpp" />
@@ -20,6 +21,7 @@
     <ClCompile Include="..\src\XML\WidgetBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Application.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\Widgets\Connector.h" />
     <ClInclude Include="..\src\Widgets\Controls\PopupMenu.h" />
