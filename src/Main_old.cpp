@@ -26,36 +26,6 @@ struct Line
 	Color clr;
 };
 
-Vec3f screenToWorld(const CameraOrtho& cam, Vec2f coords, float dist)
-{
-	GLdouble wolrdX, worldY, worldZ;
-	double clientX, clientY, clientZ;
-	GLint viewport[4];
-
-	glLoadIdentity();
-	glGetIntegerv(GL_VIEWPORT, viewport);
-
-	auto modelView = cam.getModelViewMatrix();
-	auto projection = cam.getProjectionMatrix();
-
-	GLdouble mv[16];
-	GLdouble proj[16]; 
-
-	for(int i = 0; i < 16; ++i)
-	{
-		mv[i] = modelView.m[i];
-		proj[i] = projection.m[i];
-	}
-
-	wolrdX = coords.x;
-	worldY = viewport[3] - coords.y; //invert y 
-	worldZ = (dist - 5) / (10000 - 5);
-	gluUnProject(wolrdX, worldY, worldZ, mv, proj, viewport, &clientX, &clientY, &clientZ);
-
-	return Vec3f{ float(clientX), float(clientY), float(clientZ) };
-}
-
-
 class TestApp : public cinder::app::AppNative
 {
 	std::vector<Line> mPoints;
