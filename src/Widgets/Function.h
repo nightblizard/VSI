@@ -1,25 +1,20 @@
 #pragma once
 
 #include "Widget.h"
+#include "Dragable.h"
 #include <cinder\Color.h>
 
 namespace Widgets
 {
 	class Connector;
 
-	class Function : public Widget
+	class Function : public Dragable
 	{
 		std::vector<std::shared_ptr<Connector>> mInputs;
 		std::vector<std::shared_ptr<Connector>> mOutputs;
 		std::vector<std::shared_ptr<Connector>> mVariables;
 
 		cinder::Color mColor = cinder::Color::hex(0xFFC993);
-
-
-		void OnMouseUp(cinder::app::MouseEvent& event) override;
-		void OnMouseDown(cinder::app::MouseEvent& event) override;
-		void OnMouseMove(cinder::app::MouseEvent& event) override;
-		void OnMouseDrag(cinder::app::MouseEvent& event) override;
 
 	public:
 		void Draw() const override;

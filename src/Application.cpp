@@ -116,7 +116,6 @@ void Application::setup()
 	getForegroundWindow()->setTitle("VSI");
 	mParams = params::InterfaceGl::create("Foobar", Vec2i(200, 160));
 
-	mParams->addParam("Scene Rotation:", &mSceneRotation);
 	mParams->addParam("Zoom in %:", &mCameraDistance);
 	mParams->addParam("px", &posX);
 	mParams->addParam("py", &posY);
@@ -124,8 +123,6 @@ void Application::setup()
 	mCam.setOrtho(posX,
 				  static_cast<float>(app::getWindowWidth()), static_cast<float>(app::getWindowHeight()),
 				  posY, 5.f, 10000.f);
-
-	mRatio = app::getWindowAspectRatio();
 
 #ifdef _WIN32
 	HWND wnd = (HWND)getForegroundWindow()->getNative();
@@ -147,8 +144,6 @@ void Application::update()
 				  app::getWindowWidth() * mCameraDistance / 100 + posX,
 				  app::getWindowHeight() * mCameraDistance / 100 + posY,
 				  posY, 5.f, 10000.f);
-
-	mRatio = app::getWindowAspectRatio();
 }
 
 

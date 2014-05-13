@@ -108,32 +108,4 @@ namespace Widgets
 	void Function::AddVariable(std::shared_ptr<Connector> variable)
 	{
 	}
-
-
-	void Function::OnMouseUp(cinder::app::MouseEvent& event)
-	{
-		auto pos = event.getPos();
-
-		if (mBounds.contains(pos))
-			event.setHandled();
-	}
-
-
-	void Function::OnMouseDown(cinder::app::MouseEvent& event)
-	{
-		auto pos = event.getPos();
-
-		if (mBounds.contains(pos))
-			event.setHandled();
-	}
-
-
-	void Function::OnMouseMove(cinder::app::MouseEvent& event)
-	{
-	}
-
-
-	void Function::OnMouseDrag(cinder::app::MouseEvent& event)
-	{
-	}
 }

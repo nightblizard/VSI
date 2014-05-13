@@ -8,11 +8,8 @@ class Application : public cinder::app::AppNative
 	cinder::Vec3f mUp = cinder::Vec3f(0, 1, 0);
 	float mCameraDistance = 100;
 
-	cinder::Quatf mSceneRotation;
-
 	cinder::Color mColor{ 1.f, 0.f, 0.f };
 
-	float mRatio;
 	float posX = 224.f;
 	float posY = 126.f;
 

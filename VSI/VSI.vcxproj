@@ -15,6 +15,7 @@
     <ClCompile Include="..\src\Main_old.cpp" />
     <ClCompile Include="..\src\Widgets\Connector.cpp" />
     <ClCompile Include="..\src\Widgets\Controls\PopupMenu.cpp" />
+    <ClCompile Include="..\src\Widgets\Dragable.cpp" />
     <ClCompile Include="..\src\Widgets\EventHandler.cpp" />
     <ClCompile Include="..\src\Widgets\Function.cpp" />
     <ClCompile Include="..\src\Widgets\Widget.cpp" />
@@ -25,6 +26,7 @@
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\Widgets\Connector.h" />
     <ClInclude Include="..\src\Widgets\Controls\PopupMenu.h" />
+    <ClInclude Include="..\src\Widgets\Dragable.h" />
     <ClInclude Include="..\src\Widgets\EventHandler.h" />
     <ClInclude Include="..\src\Widgets\Function.h" />
     <ClInclude Include="..\src\Widgets\Widget.h" />

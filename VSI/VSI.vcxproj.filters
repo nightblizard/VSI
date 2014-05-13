@@ -32,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Application.cpp" />
     <ClCompile Include="..\src\Main_old.cpp" />
+    <ClCompile Include="..\src\Widgets\Dragable.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h" />
@@ -54,5 +57,8 @@
       <Filter>Widgets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Application.h" />
+    <ClInclude Include="..\src\Widgets\Dragable.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
