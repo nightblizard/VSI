@@ -5,13 +5,6 @@
 
 namespace Widgets
 {
-	Widget::Widget(std::shared_ptr<Widget> parent, RelativePoint relativeTo) :
-		mParent(parent),
-		mRelativeTo(relativeTo)
-	{
-	}
-
-
 	void Widget::updateBounds()
 	{
 		if(mParent == nullptr)
@@ -217,5 +210,12 @@ namespace Widgets
 	void Widget::Update()
 	{
 		updateBounds();
+	}
+
+
+	Widget::Widget(std::shared_ptr<Widget> parent, RelativePoint relativeTo) :
+		mParent(parent),
+		mRelativeTo(relativeTo)
+	{
 	}
 }

@@ -19,5 +19,6 @@ namespace XML
 		WidgetBuilder();
 
 		std::shared_ptr<Widgets::Function> Parse(const std::string& filePath);
+
 };
 }

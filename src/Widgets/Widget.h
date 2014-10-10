@@ -60,12 +60,6 @@ namespace Widgets
 		virtual void OnKeyDown(cinder::app::KeyEvent& event) override {}
 
 	public:
-		virtual ~Widget() = default;
-		Widget() = default;
-		Widget(const Widget&) = default;
-
-		Widget(std::shared_ptr<Widget> parent, RelativePoint relativeTo = RelativePoint::None);
-
 		cinder::Vec2i GetPosition() const;
 		void SetPosition(const cinder::Vec2i& pos);
 
@@ -90,5 +84,13 @@ namespace Widgets
 		virtual void Draw() const;
 
 		virtual void Update();
+
+		Widget() = default;
+		Widget(std::shared_ptr<Widget> parent, RelativePoint relativeTo = RelativePoint::None);
+		Widget(const Widget&) = default;
+		Widget(Widget&& rhs) = default;
+		Widget& operator=(const Widget&) = default;
+		Widget& operator=(Widget&&) = default;
+		virtual ~Widget() = default;
 	};
 }

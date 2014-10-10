@@ -32,13 +32,18 @@ namespace Widgets
 		virtual void OnKeyDown(cinder::app::KeyEvent& event) = 0;
 
 	public:
-		virtual ~EventHandler() {}
-
-
 		template <typename EVENT_TYPE, Event EVENT>
 		void OnEvent(cinder::app::Event& event)
 		{
 			onEventImpl(static_cast<EVENT_TYPE*>(&event), EVENT);
 		}
+
+
+		EventHandler() = default;
+		EventHandler(const EventHandler&) = default;
+		EventHandler(EventHandler&& rhs) = default;
+		EventHandler& operator=(const EventHandler&) = default;
+		EventHandler& operator=(EventHandler&&) = default;
+		virtual ~EventHandler() = default;
 	};
 }
