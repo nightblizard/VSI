@@ -88,5 +88,7 @@ namespace Widgets
 		void SetParent(std::shared_ptr<Widget> parent);
 
 		virtual void Draw() const;
+
+		virtual void Update();
 	};
 }

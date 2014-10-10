@@ -17,6 +17,7 @@ class Application : public cinder::app::AppNative
 	int mouseDownY;
 
 	std::shared_ptr<Widgets::Widget> mFunction;
+	std::shared_ptr<Widgets::Widget> mFunction2;
 
 public:
 	void setup();

@@ -9,9 +9,15 @@ namespace Widgets
 	{
 		static cinder::Font font = cinder::Font("Consolas", 32);
 
+		cinder::ColorT<float> frameColor;
+		if (IsSelected())
+			frameColor = cinder::Color(255, 0, 0);
+		else
+			frameColor = cinder::Color::black();
+
 		/*		Background		*/
 		static auto innerRect = cinder::Rectf{ -2.f, -2.f, 2.f, 2.f };
-		cinder::gl::color(cinder::Color::black());
+		cinder::gl::color(frameColor);
 		cinder::gl::drawSolidRect(mBounds);
 		cinder::gl::color(mColor);
 		cinder::gl::drawSolidRect(mBounds - innerRect);
@@ -20,7 +26,7 @@ namespace Widgets
 		/*		Title			*/
 		cinder::gl::enableAlphaBlending();
 
-		cinder::gl::color(cinder::Color::black());
+		cinder::gl::color(frameColor);
 		auto titleRect = cinder::Rectf{ mBounds.x1, mBounds.y1, mBounds.x2, mBounds.y1 + 35 };
 		cinder::gl::drawSolidRect(titleRect);
 		cinder::gl::color(mColor);
@@ -107,5 +113,17 @@ namespace Widgets
 
 	void Function::AddVariable(std::shared_ptr<Connector> variable)
 	{
+	}
+
+	void Function::OnDrag()
+	{
+		for (auto& input : mInputs)
+			input->Update();
+
+		for (auto& output : mOutputs)
+			output->Update();
+
+		for (auto& variable : mVariables)
+			variable->Update();
 	}
 }

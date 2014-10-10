@@ -213,4 +213,9 @@ namespace Widgets
 	{
 		cinder::gl::drawSolidRect(mBounds);
 	}
+
+	void Widget::Update()
+	{
+		updateBounds();
+	}
 }

@@ -22,8 +22,11 @@
 
 using namespace cinder;
 
+Vec3f mousePos(0, 0, 0);
+
 Vec3f screenToWorld(const CameraOrtho& cam, Vec2f coords, float dist)
 {
+	
 	GLdouble wolrdX, worldY, worldZ;
 	double clientX, clientY, clientZ;
 	GLint viewport[4];
@@ -51,36 +54,60 @@ Vec3f screenToWorld(const CameraOrtho& cam, Vec2f coords, float dist)
 	return Vec3f{ float(clientX), float(clientY), float(clientZ) };
 }
 
+int GetInitiator(app::MouseEvent event)
+{
+	int initiator = 0;
+	if (event.isLeft())
+		initiator |= cinder::app::MouseEvent::LEFT_DOWN;
+	if (event.isRight())
+		initiator |= cinder::app::MouseEvent::RIGHT_DOWN;
+	if (event.isMiddle())
+		initiator |= cinder::app::MouseEvent::MIDDLE_DOWN;
+
+	return initiator;
+}
+
 
 void Application::mouseUp(app::MouseEvent event)
 {
-	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseUp>(event);
+	auto mousePosition = screenToWorld(mCam, cinder::Vec2f{ (float)event.getX(), (float)event.getY() }, mCameraDistance);
+	app::MouseEvent ev(getWindow(), GetInitiator(event), mousePosition[0], mousePosition[1], 0, event.getWheelIncrement(), event.getNativeModifiers());
+
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseUp>(ev);
+	mFunction2->OnEvent<app::MouseEvent, Widgets::Event::MouseUp>(ev);
 }
 
 
 void Application::mouseDown(app::MouseEvent event)
 {
-	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(event);
+	auto mousePosition = screenToWorld(mCam, cinder::Vec2f{ (float)event.getX(), (float)event.getY() }, mCameraDistance);
+	app::MouseEvent ev(getWindow(), GetInitiator(event), mousePosition[0], mousePosition[1], 0, event.getWheelIncrement(), event.getNativeModifiers());
 
-	if (event.isHandled() == false && event.isLeft())
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(ev);
+	mFunction2->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(ev);
+
+	if (ev.isHandled() == false && ev.isLeft())
 	{
 		mouseDownX = event.getX();
 		mouseDownY = event.getY();
-		std::cout << std::endl;
 	}
+
+	mousePos = mousePosition;
 }
 
 
 void Application::mouseDrag(app::MouseEvent event)
 {
-	app::MouseEvent e(getWindow(), 0, 0, 0, 0, 0.f, 0);
+	auto mousePosition = screenToWorld(mCam, cinder::Vec2f{ (float)event.getX(), (float)event.getY() }, mCameraDistance);
+	app::MouseEvent ev(getWindow(), GetInitiator(event), mousePosition[0], mousePosition[1], 0, event.getWheelIncrement(), event.getNativeModifiers());
 
-	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDrag>(event);
+	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDrag>(ev);
+	mFunction2->OnEvent<app::MouseEvent, Widgets::Event::MouseDrag>(ev);
 
-	if (event.isHandled() || event.isRight())
+	if (ev.isHandled() || ev.isRight())
 		return;
 
-	auto modifier = event.getNativeModifiers();
+	auto modifier = ev.getNativeModifiers();
 
 	if (modifier == 1) //Left Mouse Button
 	{
@@ -132,6 +159,7 @@ void Application::setup()
 
 	XML::WidgetBuilder wb;
 	mFunction = wb.Parse("xml/Foobar.xml");
+	mFunction2 = wb.Parse("xml/Foobar2.xml");
 }
 
 
@@ -155,6 +183,10 @@ void Application::draw()
 
 	gl::color(cinder::Color::black());
 	mFunction->Draw();
+	mFunction2->Draw();
+
+	cinder::gl::color(cinder::Color::black());
+	gl::drawSolidCircle(cinder::Vec2f(mousePos[0], mousePos[1]), 4);
 
 	mParams->draw();
 }

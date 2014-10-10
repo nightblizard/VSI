@@ -16,6 +16,8 @@ namespace Widgets
 
 		cinder::Color mColor = cinder::Color::hex(0xFFC993);
 
+		void OnDrag() override;
+
 	public:
 		void Draw() const override;
 

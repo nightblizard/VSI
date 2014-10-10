@@ -7,6 +7,7 @@ namespace Widgets
 	void Dragable::OnMouseUp(cinder::app::MouseEvent& event)
 	{
 		SetSelected(false);
+		OnSelect(event);
 	}
 
 
@@ -18,6 +19,8 @@ namespace Widgets
 		{
 			event.setHandled();
 			SetSelected();
+			mLastMousePosition.x = event.getX();
+			mLastMousePosition.y = event.getY();
 		}
 	}
 
@@ -37,19 +40,22 @@ namespace Widgets
 		int mouseDownY = mLastMousePosition.y;
 
 		mLastMousePosition.x = mouseX;
-		mLastMousePosition.y = mouseDownY;
+		mLastMousePosition.y = mouseY;
 
 		float mx = 0, my = 0;
+		auto frameRate = event.getWindow()->getApp()->getFrameRate();
 
 		if (mouseX != mouseDownX)
-			mx = (mouseX - mouseDownX) * 0.01f * event.getWindow()->getApp()->getFrameRate();
+			mx = (mouseX - mouseDownX) * 0.01f * frameRate;
 		if (mouseY != mouseDownY)
-			my = (mouseY - mouseDownY) * 0.01f * event.getWindow()->getApp()->getFrameRate();
+			my = (mouseY - mouseDownY) * 0.01f * frameRate;
 
 		mBounds.x1 += mx;
 		mBounds.x2 += mx;
 		mBounds.y1 += my;
 		mBounds.y2 += my;
+
+		OnDrag();
 	}
 
 
@@ -62,5 +68,6 @@ namespace Widgets
 	void Dragable::SetSelected(bool selected)
 	{
 		mIsSelected = selected;
+		OnSelect(cinder::app::MouseEvent());
 	}
 }
