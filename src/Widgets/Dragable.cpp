@@ -6,16 +6,15 @@ namespace Widgets
 {
 	void Dragable::OnMouseUp(cinder::app::MouseEvent& event)
 	{
-		SetSelected(false);
-		OnSelect(event);
+		Selectable::OnMouseUp(event);
 	}
 
 
 	void Dragable::OnMouseDown(cinder::app::MouseEvent& event)
 	{
-		auto pos = event.getPos();
+		Selectable::OnMouseDown(event);
 
-		if (mBounds.contains(pos))
+		if(IsSelected())
 		{
 			event.setHandled();
 			SetSelected();
@@ -56,18 +55,5 @@ namespace Widgets
 		mBounds.y2 += my;
 
 		OnDrag();
-	}
-
-
-	bool Dragable::IsSelected() const
-	{
-		return mIsSelected;
-	}
-
-	
-	void Dragable::SetSelected(bool selected)
-	{
-		mIsSelected = selected;
-		OnSelect(cinder::app::MouseEvent());
 	}
 }

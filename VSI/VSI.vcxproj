@@ -21,6 +21,7 @@
     <ClCompile Include="..\src\Widgets\Dragable.cpp" />
     <ClCompile Include="..\src\Widgets\EventHandler.cpp" />
     <ClCompile Include="..\src\Widgets\Function.cpp" />
+    <ClCompile Include="..\src\Widgets\Selectable.cpp" />
     <ClCompile Include="..\src\Widgets\Widget.cpp" />
     <ClCompile Include="..\src\XML\WidgetBuilder.cpp" />
   </ItemGroup>
@@ -36,6 +37,7 @@
     <ClInclude Include="..\src\Widgets\Dragable.h" />
     <ClInclude Include="..\src\Widgets\EventHandler.h" />
     <ClInclude Include="..\src\Widgets\Function.h" />
+    <ClInclude Include="..\src\Widgets\Selectable.h" />
     <ClInclude Include="..\src\Widgets\Widget.h" />
     <ClInclude Include="..\src\XML\WidgetBuilder.h" />
   </ItemGroup>

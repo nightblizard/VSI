@@ -86,8 +86,9 @@ void Application::mouseDown(app::MouseEvent event)
 	auto mousePosition = screenToWorld(mCam, cinder::Vec2f{ (float)event.getX(), (float)event.getY() }, mCameraDistance);
 	app::MouseEvent ev(getWindow(), GetInitiator(event), mousePosition[0], mousePosition[1], 0, event.getWheelIncrement(), event.getNativeModifiers());
 
-	mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(ev);
 	mFunction2->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(ev);
+	if (!ev.isHandled())
+		mFunction->OnEvent<app::MouseEvent, Widgets::Event::MouseDown>(ev);
 
 	if (ev.isHandled() == false && ev.isLeft())
 	{

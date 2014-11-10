@@ -20,13 +20,13 @@ class Application : public cinder::app::AppNative
 	std::shared_ptr<Widgets::Widget> mFunction2;
 
 public:
-	void setup();
-	void draw();
-	void prepareSettings(Settings *settings);
-	void update();
-	void mouseDrag(cinder::app::MouseEvent event);
-	void mouseUp(cinder::app::MouseEvent event);
-	void mouseDown(cinder::app::MouseEvent event);
+	void setup() override;
+	void draw() override;
+	void prepareSettings(Settings *settings) override;
+	void update() override;
+	void mouseDrag(cinder::app::MouseEvent event) override;
+	void mouseUp(cinder::app::MouseEvent event) override;
+	void mouseDown(cinder::app::MouseEvent event) override;
 
 	cinder::params::InterfaceGlRef	mParams;
 };

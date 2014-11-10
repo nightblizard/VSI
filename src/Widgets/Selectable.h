@@ -1,20 +1,21 @@
 #pragma once
-#include "Selectable.h"
 #include "Widget.h"
 
 
 namespace Widgets
 {
-	class Dragable : public Selectable
+	class Selectable : public Widget
 	{
-		cinder::Vec2i mLastMousePosition;
+		bool mIsSelected = false;
 
 	protected:
 		void OnMouseUp(cinder::app::MouseEvent& event) override;
 		void OnMouseDown(cinder::app::MouseEvent& event) override;
-		void OnMouseDrag(cinder::app::MouseEvent& event) override;
-		virtual void OnDrag() {}
+
+		virtual void OnSelect(cinder::app::MouseEvent& event) {}
 
 	public:
+		bool IsSelected() const;
+		void SetSelected(bool selected = true);
 	};
 }
