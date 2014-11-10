@@ -95,12 +95,18 @@ void Application::setup()
 #endif 
 
 	XML::WidgetBuilder wb;
-	mFunction = wb.Parse("xml/Foobar.xml");
-	mFunction2 = wb.Parse("xml/Foobar2.xml");
+
+	auto mFunction = wb.Parse("xml/Foobar.xml");
+	auto mFunction2 = wb.Parse("xml/Foobar2.xml");
 	auto scene = std::make_shared<Scenes::Workplace>("Workplace");
 	scene->AddWidget(mFunction);
 	scene->AddWidget(mFunction2);
 	mSceneManager.AddScene(scene);
+
+	auto panel = wb.Parse("xml/Testing.xml");
+	auto uiScene = std::make_shared<Scenes::Scene>("Menu");
+	uiScene->AddWidget(panel);
+	mSceneManager.AddScene(uiScene);
 }
 
 

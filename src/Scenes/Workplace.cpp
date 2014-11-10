@@ -1,4 +1,3 @@
-#include <cinder/Camera.h>
 #include <cinder/Color.h>
 
 #include "../stdafx.h"
@@ -87,6 +86,7 @@ namespace Scenes
 
 	void Workplace::OnMouseDown(cinder::app::MouseEvent& event)
 	{
+		auto pos = mLastMousePosition;
 		auto ev = UpdateEventMouseCoordinates(event, mCamera, &mLastMousePosition);
 		Scene::OnMouseDown(ev);
 
@@ -95,6 +95,10 @@ namespace Scenes
 			mMouseDownX = event.getX();
 			mMouseDownY = event.getY();
 		}
+
+		if(ev.isHandled())
+			mLastMousePosition = pos;
+
 		event.setHandled(ev.isHandled());
 	}
 
@@ -144,7 +148,6 @@ namespace Scenes
 
 	void Workplace::Draw()
 	{
-		cinder::gl::setMatrices(mCamera);
 		Scene::Draw();
 
 		cinder::gl::color(cinder::Color::black());
@@ -163,8 +166,8 @@ namespace Scenes
 
 		
 		mCamera.setOrtho(mPosX,
-						 1500 + mPosX,
-						 900 + mPosY,
+						 cinder::app::getWindowWidth() + mPosX,
+						 cinder::app::getWindowHeight() + mPosY,
 						 mPosY, 5.f, 10000.f);
 	}
 }

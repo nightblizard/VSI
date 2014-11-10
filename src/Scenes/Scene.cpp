@@ -1,3 +1,4 @@
+#include "../stdafx.h"
 #include "Scene.h"
 
 
@@ -6,6 +7,13 @@ namespace Scenes
 	Scene::Scene(std::string name) :
 		mName(name)
 	{
+		mCamera.setOrtho(0.f,
+						 static_cast<float>(cinder::app::getWindowWidth()),
+						 static_cast<float>(cinder::app::getWindowHeight()),
+						 0.f, 5.f, 10000.f);
+
+		mEye = cinder::Vec3f(0.f, 0.f, 100);
+		mCamera.lookAt(mEye, mCenter, mUp);
 	}
 
 
@@ -59,6 +67,7 @@ namespace Scenes
 
 	void Scene::Draw()
 	{
+		cinder::gl::setMatrices(mCamera);
 		for (auto& widget : mWidgets)
 			widget->Draw();
 	}

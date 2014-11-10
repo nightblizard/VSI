@@ -20,6 +20,7 @@
     <ClCompile Include="..\src\Scenes\SceneManager.cpp" />
     <ClCompile Include="..\src\Scenes\Workplace.cpp" />
     <ClCompile Include="..\src\Widgets\Connector.cpp" />
+    <ClCompile Include="..\src\Widgets\Controls\Panel.cpp" />
     <ClCompile Include="..\src\Widgets\Controls\PopupMenu.cpp" />
     <ClCompile Include="..\src\Widgets\Dragable.cpp" />
     <ClCompile Include="..\src\Widgets\EventHandler.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="..\src\Scenes\Workplace.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\Widgets\Connector.h" />
+    <ClInclude Include="..\src\Widgets\Controls\Panel.h" />
     <ClInclude Include="..\src\Widgets\Controls\PopupMenu.h" />
     <ClInclude Include="..\src\Widgets\Dragable.h" />
     <ClInclude Include="..\src\Widgets\EventHandler.h" />

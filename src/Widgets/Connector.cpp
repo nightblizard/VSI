@@ -4,8 +4,9 @@
 
 namespace Widgets
 {
-	void Connector::Draw() const
+	void Connector::Draw()
 	{
+		updateBounds();
 		Widget::Draw();
 	}
 }

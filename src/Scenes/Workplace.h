@@ -5,11 +5,6 @@ namespace Scenes
 {
 	class Workplace : public Scene
 	{
-		cinder::CameraOrtho mCamera;
-		cinder::Vec3f mEye{ 0.0f, 0.0f, 100.f };
-		cinder::Vec3f mCenter = cinder::Vec3f::zero();
-		cinder::Vec3f mUp = cinder::Vec3f(0, 1, 0);
-
 		cinder::Color mColor{ 1.f, 0.f, 0.f };
 
 		float mPosX = 224.f;

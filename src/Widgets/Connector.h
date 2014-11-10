@@ -7,7 +7,7 @@ namespace Widgets
 	class Connector : public Widget
 	{
 	public:
-		void Draw() const override;
+		void Draw();
 
 
 		Connector() = default;

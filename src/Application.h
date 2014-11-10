@@ -2,9 +2,6 @@
 
 class Application : public cinder::app::AppNative
 {
-	std::shared_ptr<Widgets::Widget> mFunction;
-	std::shared_ptr<Widgets::Widget> mFunction2;
-
 	Scenes::SceneManager mSceneManager;
 
 public:
