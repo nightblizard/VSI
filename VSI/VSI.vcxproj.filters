@@ -13,6 +13,12 @@
     <Filter Include="Config">
       <UniqueIdentifier>{e4ad0f42-eee9-4c99-8cdd-007eeb9fe58e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{cec12949-fe65-489e-8f0b-9e7e44736830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{b2aa5025-b2d0-4611-86bf-6c8dcf423ca3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\XML\WidgetBuilder.cpp">
@@ -49,6 +55,15 @@
     </ClCompile>
     <ClCompile Include="..\src\Widgets\Selectable.cpp">
       <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Workplace.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +104,15 @@
     </ClInclude>
     <ClInclude Include="..\src\Widgets\Selectable.h">
       <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Workplace.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

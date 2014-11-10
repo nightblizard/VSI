@@ -49,11 +49,15 @@ namespace Widgets
 		if (mouseY != mouseDownY)
 			my = (mouseY - mouseDownY) * 0.01f * frameRate;
 
+		mPosition.x += mx;
+		mPosition.y += my;
+		updateBounds();
+		/*
 		mBounds.x1 += mx;
 		mBounds.x2 += mx;
 		mBounds.y1 += my;
 		mBounds.y2 += my;
-
+		*/
 		OnDrag();
 	}
 }
